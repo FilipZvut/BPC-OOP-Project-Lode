@@ -1,6 +1,6 @@
 ﻿public class Board
 {
-    public const int BoardLenght = 5;
+    public const int BoardLength = 5;
     public enum CellState
     {
         Empty,
@@ -13,15 +13,15 @@
 
     public Board()
     {
-        _grid = new CellState[BoardLenght, BoardLenght];
+        _grid = new CellState[BoardLength, BoardLength];
         InitializeGrid();
     }
 
     private void InitializeGrid()
     {
-        for (int i = 0; i < BoardLenght; i++)
+        for (int i = 0; i < BoardLength; i++)
         {
-            for (int j = 0; j < BoardLenght; j++)
+            for (int j = 0; j < BoardLength; j++)
             {
                 _grid[i, j] = CellState.Empty;
             }

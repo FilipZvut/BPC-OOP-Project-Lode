@@ -29,10 +29,12 @@ public class GameManager
             game.PlaceShipsRandomly(game._player2);       
     }
 
-    void SelectPlaceShips(int id)
+    public void SelectPlaceShips(int id)
     {
 
     }
+
+
     void Main(string[] args)
     {
         Game game = new Game(player1, player2);

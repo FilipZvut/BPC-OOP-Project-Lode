@@ -1,6 +1,4 @@
 ﻿
-
-
 public class Game
 {
     public Player _player1;
@@ -20,9 +18,10 @@ public class Game
         Random random = new Random();
         while(ShipsPlaced<5)
         {
-            
-            int row = random.Next(0, Board.BoardLenght-1);
-            int col = random.Next(0, Board.BoardLenght-1);
+            random.Next();
+            int row = random.Next(0, Board.BoardLength);
+            random.Next();
+            int col = random.Next(0, Board.BoardLength);
             if (player.Board.PlaceShip(row, col))
                 ShipsPlaced++;
             
