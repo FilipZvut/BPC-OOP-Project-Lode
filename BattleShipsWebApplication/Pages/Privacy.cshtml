@@ -99,11 +99,11 @@
                 <div class="cell1 empty-cell2"></div> <!-- Prázdný čtvereček vlevo nahoře -->
                 @for (int row = 0; row < 5; row++)
                 {
-                    <div class="cell2">@((char)('A' + row))</div>
+                    <div class="cell1 empty-cell1">@((char)('A' + row))</div>
                 }
                 @for (int row = 0; row < 5; row++)
                 {
-                    <div class="cell2">@((char)('1' + row))</div>
+                    <div class="cell1 empty-cell1">@((char)('1' + row))</div>
                     @for (int col = 0; col < 5; col++)
                     {
                         Board.CellState cellState = grid[row, col];
@@ -119,11 +119,11 @@
                 <div class="cell1 empty-cell2"></div> <!-- Prázdný čtvereček vlevo nahoře -->
                 @for (int row = 0; row < 5; row++)
                 {
-                    <div class="cell2">@((char)('A' + row))</div>
+                    <div class="cell1 empty-cell2">@((char)('A' + row))</div>
                 }
                 @for (int row = 0; row < 5; row++)
                 {
-                    <div class="cell2">@((char)('1' + row))</div>
+                    <div class="cell1 empty-cell2">@((char)('1' + row))</div>
                     @for (int col = 0; col < 5; col++)
                     {
                         Board.CellState cellState = grid[row, col];
@@ -146,7 +146,7 @@
             case Board.CellState.Empty:
                 return "";
             case Board.CellState.Ship:  
-                return "A";
+                return "S";
             case Board.CellState.Hit:
                 return "X";
             case Board.CellState.Miss:
