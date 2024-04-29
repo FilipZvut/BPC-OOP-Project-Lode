@@ -10,4 +10,9 @@
         Id = id;
         Name = name;
     }
+
+    public Board.CellState[,] GetGrid()
+    {
+        return Board._grid;
+    }
 }

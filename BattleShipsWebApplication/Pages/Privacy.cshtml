@@ -2,7 +2,157 @@
 @model PrivacyModel
 @{
     ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+
+    GameManager gm = new GameManager();
+    gm.GameCreated("cc", "pc");
+    gm.RandomPlace(1);
+    Board.CellState[,] grid = gm.player1.GetGrid();
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ADD8E6;
+            padding-top: 50px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .board {
+            border: 2px solid #000;
+            background-color: #ADD8E6;
+            width: 500px;
+            height: 500px;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr); /* Přidáme jednu sloupcovou buňku navíc pro označení řádků a sloupců */
+            grid-template-rows: repeat(6, 1fr);
+            gap: 1px;
+        }
+
+        .cell2 {
+            border: 1px solid #999;
+            background-color: #87CEFA;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer; /* Změněno z 'pointer' na 'default' */
+        }
+
+        .cell1 {
+            border: 1px solid #999;
+            background-color: #87CEFA;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: default; /* Změněno z 'pointer' na 'default' */
+        }
+
+        .cell2:hover {
+            background-color: #808080; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
+        }
+
+        .hit {
+            background-color: #ff0000;
+        }
+
+        .miss {
+            background-color: #0000ff;
+        }
+
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            color: #FFFFFF;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Nový styl pro první čtvereček vlevo nahoře */
+        .empty-cell {
+            border: none; /* Odstraníme rámeček */
+            background-color: transparent; /* Průhledné pozadí */
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center; color: #000000;">Battleship Game</h1>
+    <div class="container">
+        <div style="text-align: center;">
+            <h2 style="color: #000000;">cc1</h2>
+            <div class="board" id="opponent-board">
+                <!-- Opponent's board will be dynamically generated here -->
+                <div class="cell1 empty-cell2"></div> <!-- Prázdný čtvereček vlevo nahoře -->
+                @for (int row = 0; row < 5; row++)
+                {
+                    <div class="cell2">@((char)('A' + row))</div>
+                }
+                @for (int row = 0; row < 5; row++)
+                {
+                    <div class="cell2">@((char)('1' + row))</div>
+                    @for (int col = 0; col < 5; col++)
+                    {
+                        Board.CellState cellState = grid[row, col];
+                        <div class="cell2">@GetCellSymbol(cellState)</div>
+                    }
+                }
+            </div>
+        </div>
+        <div style="text-align: center;">
+            <h2 style="color: #000000;">cc</h2>
+            <div class="board" id="opponent-board">
+                <!-- Opponent's board will be dynamically generated here -->
+                <div class="cell1 empty-cell2"></div> <!-- Prázdný čtvereček vlevo nahoře -->
+                @for (int row = 0; row < 5; row++)
+                {
+                    <div class="cell2">@((char)('A' + row))</div>
+                }
+                @for (int row = 0; row < 5; row++)
+                {
+                    <div class="cell2">@((char)('1' + row))</div>
+                    @for (int col = 0; col < 5; col++)
+                    {
+                        Board.CellState cellState = grid[row, col];
+                        <div class="cell2">@GetCellSymbol(cellState)</div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+    <div class="message" id="message">Waiting for when filip nebude gej</div>
+</body>
+</html>
+
+
+@functions {
+    public string GetCellSymbol(Board.CellState cellState)
+    {
+        switch (cellState)
+        {
+            case Board.CellState.Empty:
+                return "";
+            case Board.CellState.Ship:  
+                return "A";
+            case Board.CellState.Hit:
+                return "X";
+            case Board.CellState.Miss:
+                return "O";
+            default:
+                return "";
+        }
+    }
+}

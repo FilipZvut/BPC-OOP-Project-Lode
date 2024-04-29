@@ -8,7 +8,7 @@ public class GameManager
 {
     public Player player1;
     public Player player2;
-    private Game game;
+    public Game game;
 
     public void GameCreated(string name1, string name2)
     {
@@ -21,7 +21,7 @@ public class GameManager
 
     }
 
-    void RandomPlace(int id)
+    public void RandomPlace(int id)
     {
         if(id == 1)
             game.PlaceShipsRandomly(game._player1);

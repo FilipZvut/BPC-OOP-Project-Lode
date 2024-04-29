@@ -18,7 +18,7 @@ public class Game
     {
         int ShipsPlaced = 0;
         Random random = new Random();
-        while(ShipsPlaced==5)
+        while(ShipsPlaced<5)
         {
             
             int row = random.Next(0, Board.BoardLenght-1);

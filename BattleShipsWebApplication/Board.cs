@@ -1,6 +1,6 @@
 ﻿public class Board
 {
-    public const int BoardLenght = 10;
+    public const int BoardLenght = 5;
     public enum CellState
     {
         Empty,
@@ -9,7 +9,7 @@
         Miss
     }
 
-    private CellState[,] _grid;
+    public CellState[,] _grid;
 
     public Board()
     {

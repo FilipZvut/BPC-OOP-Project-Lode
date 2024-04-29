@@ -31,9 +31,14 @@ namespace projekt_lodě.Pages
             if (string.IsNullOrEmpty(name1) || string.IsNullOrEmpty(name2))
             {
 
-                Chyba = "Zadejte Názvy obou Hráčů";
+                Chyba = "Zadejte přezdívky obou hráčů";
                 return Page();
 
+            }
+            else if (name1.ToString() == name2.ToString())
+            {
+                Chyba = "Zadejte rozdílné přezdívky hráčů";
+                return Page();
             }
             else
                 return RedirectToPage("/uvodni", new { name1, name2 });
