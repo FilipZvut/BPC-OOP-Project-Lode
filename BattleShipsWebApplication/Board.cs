@@ -1,6 +1,6 @@
 ﻿public class Board
 {
-    public const int BoardLenght = 5;
+    public const int BoardLenght = 10;
     public enum CellState
     {
         Empty,
