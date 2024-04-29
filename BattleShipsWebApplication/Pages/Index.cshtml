@@ -1,15 +1,78 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Warships Game";
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding-top: 50px;
+            text-align: center;
+        }
 
-<h1>@Model.WelcomeMessage</h1>
-<form method="post">
-    <label for="player1Name">Player 1 Name:</label>
-    <input type="text" id="player1Name" name="player1Name" />
-    <label for="player2Name">Player 2 Name:</label>
-    <input type="text" id="player2Name" name="player2Name" />
-    <button type="submit">Start Game</button>
-</form>
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            button:hover {
+                background-color: #45a049;
+            }
+    </style>
+</head>
+<body>
+    <h1>Battleship Game</h1>
+    <form id="player-form" method="post">
+
+
+        <label for="name1">Zadej jméno pro hráče 1:</label>
+        <input type="text" id="name1" name="name1">
+
+        <label for="name2">Zadej jméno pro hráče 2:</label>
+        <input type="text" id="name2" name="name2">
+        <button type="submit">Start Game</button>
+    </form>
+</body>

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BattleShipsWebApplication.Pages
+namespace projekt_lodě.Pages
 {
     public class PrivacyModel : PageModel
     {

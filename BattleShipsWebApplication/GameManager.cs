@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 public class GameManager
 {
-    private Player player1;
-    private Player player2;
+    public Player player1;
+    public Player player2;
     private Game game;
 
     public void GameCreated(string name1, string name2)
