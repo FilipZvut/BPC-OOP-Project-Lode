@@ -26,6 +26,7 @@ namespace projekt_lodě.Pages
 
             // Přesměrování na stránku uvodni s přidáním parametrů do URL
             return RedirectToPage("/uvodni", new { name1, name2 });
+
         }
 
     }
