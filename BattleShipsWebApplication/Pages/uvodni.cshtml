@@ -74,53 +74,57 @@
 
         /* Nový styl pro první čtvereček vlevo nahoře */
         .empty-cell {
-            border: none; /* Odstraníme rámeček */
-            background-color: transparent; /* Průhledné pozadí */
+            background-color: #24D0F2
         }
     </style>
 </head>
 <body>
     <h1 style="text-align: center; color: #000000;">Battleship Game</h1>
     <div class="container">
+
+
         <div style="text-align: center; margin-right: 20px; font-style:bold">
             <h2 style="color: #000000;">@Model.Nazev1</h2>
             <div class="board" id="player-board">
                 <!-- Player's board will be dynamically generated here -->
-                <div class="cell1 empty-cell1"></div> <!-- Prázdný čtvereček vlevo nahoře -->
+                <div class="cell1 empty-cell"></div> <!-- Prázdný čtvereček vlevo nahoře -->
                 @for (int row = 0; row < 5; row++)
                 {
-                    <div class="cell1" disabled>@((char)('A' + row))</div>
+                    <div class="cell1 empty-cell" disabled>@((char)('A' + row))</div>
                 }
                 @for (int row = 0; row < 5; row++)
                 {
-                    <div class="cell1" disabled>@((char)('1' + row))</div>
+                    <div class="cell1 empty-cell" disabled>@((char)('1' + row))</div>
                     @for (int col = 0; col < 5; col++)
                     {
-                        <div class="cell1" disabled></div>
+                        Board.CellState cellState = @Model.Grid1[row, col];
+                        <div class="cell2">@Model.GetCellSymbol(cellState)</div>
                     }
                 }
             </div>
         </div>
+
         <div style="text-align: center;">
             <h2 style="color: #000000;">@Model.Nazev2</h2>
             <div class="board" id="opponent-board">
                 <!-- Opponent's board will be dynamically generated here -->
-                <div class="cell1 empty-cell2"></div> <!-- Prázdný čtvereček vlevo nahoře -->
+                <div class="cell1 empty-cell"></div> <!-- Prázdný čtvereček vlevo nahoře -->
                 @for (int row = 0; row < 5; row++)
                 {
-                    <div class="cell2">@((char)('A' + row))</div>
+                    <div class="cell1 empty-cell">@((char)('A' + row))</div>
                 }
                 @for (int row = 0; row < 5; row++)
                 {
-                    <div class="cell2">@((char)('1' + row))</div>
+                    <div class="cell1 empty-cell">@((char)('1' + row))</div>
                     @for (int col = 0; col < 5; col++)
                     {
-                        <div class="cell2"></div>
+                        Board.CellState cellState = @Model.Grid2[row, col];
+                        <div class="cell2">@Model.GetCellSymbol(cellState)</div>
                     }
                 }
             </div>
         </div>
     </div>
-    <div class="message" id="message">Waiting for when filip nebude gej</div>
+    <div class="message" id="message">Waiting for @Model.AktualniHrac.Name</div>
 </body>
 </html>

@@ -34,6 +34,7 @@ public class GameManager
 
     }
 
+    public Player GetAktualniHrac() {  return game._currentPlayer; }
 
     void Main(string[] args)
     {

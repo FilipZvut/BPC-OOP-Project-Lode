@@ -3,7 +3,7 @@ public class Game
 {
     public Player _player1;
     public Player _player2;
-    private Player _currentPlayer;
+    public Player _currentPlayer;
     private Player _opponent;
     public Game(Player player1, Player player2)
     {
