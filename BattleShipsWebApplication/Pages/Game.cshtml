@@ -16,7 +16,14 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #ADD8E6;
-            padding-top: 50px;
+            padding-top: 20px; 
+             margin: 0;
+         }
+
+         h1 {
+             margin-top: 0; 
+            color: #000000;
+            text-align: center;
         }
 
         .container {
@@ -46,6 +53,18 @@
             cursor: pointer; /* Změněno z 'pointer' na 'default' */
         }
 
+        .cell2T {
+            border: 0px solid #999;
+            background-color: #87CEFA;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            block-size: 5rem;
+            font-weight: bold;
+            cursor: pointer; /* Změněno z 'pointer' na 'default' */
+        }
+
         .cell1 {
             border: 1px solid #999;
             background-color: #87CEFA;
@@ -58,6 +77,10 @@
         }
 
         .cell2:hover {
+            background-color: #58B6DE; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
+        }
+
+        .cell2T:hover {
             background-color: #58B6DE; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
         }
 
@@ -113,8 +136,12 @@
                     <div class="cell1 empty-cell">@((char)('1' + row))</div>
                     @for (int col = 0; col < 5; col++)
                     {
-
-                        <div class="cell2" onclick="Play(@row,@col,'2')">@Model.GetCellSymbol(@gameManager.player2.Board.StringGrid[row, col])</div>
+                        var cellId = $"{row},{col}"; // Vytvoření ID buňky
+                        <div class="cell2">
+                            <form method="Post">
+                            <button class="cell2T" asp-page-handler="Nahodne" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.player2.Board.StringGrid[row, col])</button>
+                            </form>
+                        </div>
 
                     }
                 }
@@ -125,18 +152,3 @@
 </body>
 </html>
 
-<script>
-    function Play(row, col, id) {
-        alert("play")
-        var combine = row + ',' + col + ',' + id;
-        $.ajax({
-            url: '?handler=Play&msg=' + combine,
-            success: function (data) {
-                
-            },
-            error: function (error) {
-                
-            }
-        })
-    }
-</script>

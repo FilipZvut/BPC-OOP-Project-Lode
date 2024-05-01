@@ -29,7 +29,7 @@ namespace projekt_lodì.Pages
         {
             Chyba = "";
             GameManager gameManager = new GameManager(data);
-            gameManager.RandomPlace(1);
+            //gameManager.RandomPlace(1);
             gm = gameManager.ToString();
             Name1 = gameManager.player1.Name;
             Name2 = gameManager.player2.Name;
@@ -54,7 +54,7 @@ namespace projekt_lodì.Pages
                 _logger.LogInformation("Volana metoda onPost");
                 var data = gamedata;
                 GameManager gm = new GameManager(data);
-                gm.RandomPlace(1);
+                //gm.RandomPlace(1);
                 data = gm.ToString();
                 return RedirectToPage("/Vyber2", new { data });
             }

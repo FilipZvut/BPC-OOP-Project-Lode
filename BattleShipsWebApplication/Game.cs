@@ -33,24 +33,10 @@ public class Game
         _currentPlayer = _opponent;
         _opponent = temp;
     }
-    public int Play(int row, int col)
+    public void Play(int row, int col)
     {
-        bool hit = _opponent.Board.Attack(row, col);
+        _opponent.Board.Attack(row, col);
         SwitchTurn();
-        if (hit)
-        {
-            if (_opponent.Board.AllShipsSunk())
-            {
-                Console.WriteLine("Game Over!" + _opponent.Name + "Win!");
-                return 2;
-            }
-            Console.WriteLine(_opponent.Name+ "Hit!");
-            return 1;
-        }
-        else
-        {
-            Console.WriteLine(_opponent.Name + "Miss!");
-            return 0;
-        }
+        
     }
 }

@@ -48,10 +48,25 @@ public class GameManager
 
     public Player GetAktualniHrac() {  return game._currentPlayer; }
 
-    public bool Play(int id)
+    public bool Play(int row, int col, int id)
     {
-        game.Play(1,1);
-        return true;
+        if (id == game._currentPlayer.Id)
+        {
+            game.Play(row, col);
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public int TestVyhry()
+    {
+        if (player1.Board.AllShipsSunk())
+            return 1;
+        else if (player2.Board.AllShipsSunk())
+            return 2;
+        else
+            return 0;
     }
 
     public override string ToString()
@@ -84,6 +99,7 @@ public class GameManager
             if(i!= Board.BoardLength - 1)
                 data += ",";
         }
+        data += ";"+ game._currentPlayer.Id;
         return data;
     }
 
@@ -93,6 +109,10 @@ public class GameManager
         GameCreated(data[0], data[1]);
         player1.Board.SetupGrid(data[2]);
         player2.Board.SetupGrid(data[3]);
+        if (data[4]=="1")
+            game._currentPlayer = player1;
+        else 
+            game._currentPlayer = player2;
 
     }
 

@@ -141,13 +141,13 @@ public class Board
     {
         switch (cellname)
         {
-            case "x222":
+            case "@":
                 return CellState.Empty;
-            case "x223":
+            case "@@":
                 return CellState.Ship;
-            case "x224":
+            case "@@@":
                 return CellState.Hit;
-            case "x225":
+            case "@@@@":
                 return CellState.Miss;
             default:
                 return CellState.Empty;

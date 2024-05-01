@@ -26,29 +26,27 @@ public class GameModel : PageModel
         Nazev2 = gameManager.player2.Name;
     }
 
-    public IActionResult OnGetPlay(string msg)
+    public IActionResult OnPostPlay(string gamedata)
     {
-        
-        GameManager gm = new GameManager();
-        gm.GameCreated(Nazev1, Nazev2);
-        gm.RandomPlace(1);
-        gm.RandomPlace(2);
-        _logger.LogInformation(msg);
+         
+        var data = gamedata;
+        GameManager gameManager = new GameManager(data);
+
+
+        _logger.LogInformation(data);
 
         return Page();
     }
 
-    //public async Task OnPostPlay()
-    //{
-    //    CalcDTO calcDTO = new CalcDTO();
-    //    calcDTO.Operand1 = CalcModel.;
-    //    calcDTO.Operand2 = CalcModel.Operand2;
-    //    calcDTO.Operation = CalcModel.Operation;
-    //    HttpResponseMessage response = await
-    //    _client.PostAsJsonAsync($"api/calc", calcDTO);
-    //    response.EnsureSuccessStatusCode();
-    //    ViewData["ResultValue"] = await response.Content.ReadAsStringAsync();
-    //}
+    public IActionResult OnPostNahodne(string gamedata)
+    {
+        var data = gamedata;
+        GameManager gameManager = new GameManager(data);
+        gameManager.Play(0, 0, 1);
+        data = gameManager.ToString();
+        _logger.LogWarning(data);
+        return RedirectToPage("/game", new { data });
+    }
 
     public string GetCellSymbol(string cellState)
     {
