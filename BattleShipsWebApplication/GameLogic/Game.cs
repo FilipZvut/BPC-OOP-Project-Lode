@@ -1,5 +1,4 @@
-﻿
-public class Game
+﻿public class Game
 {
     public Player _player1;
     public Player _player2;

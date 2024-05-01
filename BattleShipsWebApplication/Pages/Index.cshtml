@@ -22,8 +22,9 @@
 
         form {
             margin-bottom: 20px;
-            background-color: #fff;
+            background-color: #58B6DE;
             padding: 20px;
+            font-weight: bold;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 300px;
@@ -61,8 +62,10 @@
             }
 
         .explanation {
+            padding-top: 20px;
             text-align: center; /* Zarovná vysvětlivky na střed */
             margin-top: 20px; /* Zvýší odstup od formuláře */
+            font-weight: bold;
             width: 300px;
             margin: 0 auto; /* Zarovná vodorovně na střed */
         }
@@ -80,7 +83,7 @@
     </form>
     <p style="font-weight:bold ">@Model.Chyba</p>
     <div class="explanation">
-        <p><strong>Vysvětlivky:</strong></p>
+        <h2><strong>Vysvětlivky:</strong></h2>
         <ul style="list-style-type: none; padding-left: 0;">
             <!-- Odstanění výchozího odrážkového seznamu a odsazení -->
             <li>Obrázek 🚢 značí loď.</li>

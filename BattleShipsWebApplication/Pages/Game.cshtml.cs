@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.VisualBasic;
-using projekt_lodě.Pages;
-using static Board;
 
 public class GameModel : PageModel
 {

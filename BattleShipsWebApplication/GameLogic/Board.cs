@@ -1,6 +1,4 @@
-﻿using static Board;
-
-public class Board
+﻿public class Board
 {
     public const int BoardLength = 5;
     public enum CellState

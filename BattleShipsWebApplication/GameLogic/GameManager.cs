@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Board;
-
-public class GameManager
+﻿public class GameManager
 {
     public Player player1;
     public Player player2;
@@ -71,9 +64,9 @@ public class GameManager
             grid = game._player2.GetGrid();
 
 
-        for (int i = 0; i < BoardLength; i++)
+        for (int i = 0; i < Board.BoardLength; i++)
         {
-            for (int j = 0; j < BoardLength; j++)
+            for (int j = 0; j < Board.BoardLength; j++)
             {
                 if (grid[i, j] == Board.CellState.Ship)
                     PocetLodi++;
