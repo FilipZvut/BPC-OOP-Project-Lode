@@ -1,4 +1,6 @@
-﻿public class Board
+﻿using static Board;
+
+public class Board
 {
     public const int BoardLength = 5;
     public enum CellState
@@ -87,13 +89,13 @@
         switch (cellState)
         {
             case CellState.Empty:
-                return "🌊";
+                return "@";
             case CellState.Ship:
-                return "🚢";
+                return "@@";
             case CellState.Hit:
-                return "💥";
+                return "@@@";
             case CellState.Miss:
-                return "❌";
+                return "@@@@";
             default:
                 return "";
         }
@@ -104,15 +106,51 @@
         return _grid;
     }
 
-    public void test()
-    {
-        _grid[0,0] = CellState.Miss;
-        UpdateStringGrid();
-    }
 
     public String[,] GetStringGrid()
     {
         return StringGrid;
     }
 
+    public void SetupGrid(string oldgrid)
+    {
+        string[] dataradky = oldgrid.Split(',');
+        for(int i =0; i < BoardLength; i++)
+        {
+            string[] dataPolozky = dataradky[i].Split('.');
+            for(int j = 0; j < BoardLength; j++)
+            {
+                StringGrid[i,j] = dataPolozky[j];
+            }
+        }
+        UpdateGrid();
+    }
+
+    public void UpdateGrid()
+    {
+        for (int i = 0; i < BoardLength; i++)
+        {
+            for (int j = 0; j < BoardLength; j++)
+            {
+                _grid[i, j] = GetCellState(StringGrid[i,j]);
+            }
+        }
+    }
+
+    CellState GetCellState(string cellname)
+    {
+        switch (cellname)
+        {
+            case "x222":
+                return CellState.Empty;
+            case "x223":
+                return CellState.Ship;
+            case "x224":
+                return CellState.Hit;
+            case "x225":
+                return CellState.Miss;
+            default:
+                return CellState.Empty;
+        }
+    }
 }

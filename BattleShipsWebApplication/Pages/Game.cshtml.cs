@@ -2,13 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.VisualBasic;
 using projekt_lodě.Pages;
+using static Board;
 
 public class GameModel : PageModel
 {
     public string Nazev1 { get; set; }
     public string Nazev2 { get; set; }
+    public string gm { get; set; }
 
-    public GameManager gameManager;
 
     
     private readonly ILogger<GameModel> _logger;
@@ -17,10 +18,12 @@ public class GameModel : PageModel
     {
         _logger = logger;
     }
-    public void OnGet(string name1, string name2)
+    public void OnGet(string data)
     {
-        Nazev1 = name1;
-        Nazev2 = name2;
+        gm = data;
+        GameManager gameManager = new GameManager(data);
+        Nazev1 = gameManager.player1.Name;
+        Nazev2 = gameManager.player2.Name;
     }
 
     public IActionResult OnGetPlay(string msg)
@@ -35,16 +38,33 @@ public class GameModel : PageModel
         return Page();
     }
 
-    public async Task OnPostPlay()
+    //public async Task OnPostPlay()
+    //{
+    //    CalcDTO calcDTO = new CalcDTO();
+    //    calcDTO.Operand1 = CalcModel.;
+    //    calcDTO.Operand2 = CalcModel.Operand2;
+    //    calcDTO.Operation = CalcModel.Operation;
+    //    HttpResponseMessage response = await
+    //    _client.PostAsJsonAsync($"api/calc", calcDTO);
+    //    response.EnsureSuccessStatusCode();
+    //    ViewData["ResultValue"] = await response.Content.ReadAsStringAsync();
+    //}
+
+    public string GetCellSymbol(string cellState)
     {
-        CalcDTO calcDTO = new CalcDTO();
-        calcDTO.Operand1 = CalcModel.;
-        calcDTO.Operand2 = CalcModel.Operand2;
-        calcDTO.Operation = CalcModel.Operation;
-        HttpResponseMessage response = await
-        _client.PostAsJsonAsync($"api/calc", calcDTO);
-        response.EnsureSuccessStatusCode();
-        ViewData["ResultValue"] = await response.Content.ReadAsStringAsync();
+        switch (cellState)
+        {
+            case "@":
+                return "🌊";
+            case "@@":
+                return "🚢";
+            case "@@@":
+                return "💥";
+            case "@@@@":
+                return "❌";
+            default:
+                return "";
+        }
     }
 
 

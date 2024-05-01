@@ -16,7 +16,7 @@ namespace projekt_lodě.Pages
 
         public void OnGet()
         {
-            Chyba = "";            
+            Chyba = "";       
         }
 
         public IActionResult OnPost()
@@ -24,7 +24,10 @@ namespace projekt_lodě.Pages
             _logger.LogInformation("Volana metoda onPost");
             var name1 = Request.Form["name1"];
             var name2 = Request.Form["name2"];
-            
+            GameManager gameManager = new GameManager();
+            gameManager.GameCreated(name1, name2);
+            var data = gameManager.ToString();
+
 
             // Přesměrování na stránku uvodni s přidáním parametrů do URL
             if (string.IsNullOrEmpty(name1) || string.IsNullOrEmpty(name2))
@@ -40,7 +43,7 @@ namespace projekt_lodě.Pages
                 return Page();
             }
             else
-                return RedirectToPage("/Game", new { name1, name2 });
+                return RedirectToPage("/Vyber", new { data });
         }
 
     }

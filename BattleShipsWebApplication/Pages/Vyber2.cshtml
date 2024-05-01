@@ -1,10 +1,5 @@
 ﻿@page
-@model GameModel
-@{
-    ViewData["Title"] = "BattleShips";
-    GameManager gameManager = new GameManager(@Model.gm);
-
-}
+@model Vyber2Model
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +16,8 @@
 
         .container {
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Zarovnání obsahu ve sloupci */
+            align-items: center; /* Zarovnání obsahu na střed */
         }
 
         .board {
@@ -41,7 +37,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 3rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer; /* Změněno z 'pointer' na 'default' */
         }
@@ -58,7 +54,15 @@
         }
 
         .cell2:hover {
-            background-color: #58B6DE; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
+            background-color: #808080; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
+        }
+
+        .hit {
+            background-color: #ff0000;
+        }
+
+        .miss {
+            background-color: #0000ff;
         }
 
         .message {
@@ -74,13 +78,42 @@
         .empty-cell {
             background-color: #24D0F2
         }
+
+        /* Styl pro tlačítka */
+        .button {
+            background-color: #4CAF50; /* Zelená barva */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+            /* Styl pro tlačítko po najetí myší */
+            .button:hover {
+                background-color: #45a049;
+            }
+
+        /* Styl pro tlačítka vedle sebe */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+            .button-container .button {
+                margin: 0 10px; /* Odsazení mezi tlačítky */
+            }
     </style>
 </head>
 <body>
     <h1 style="text-align: center; color: #000000;">Battleship Game</h1>
     <div class="container">
         <div style="text-align: center; margin-right: 20px; font-style:bold">
-            <h2 style="color: #000000;">@Model.Nazev1</h2>
+            <h2 style="color: #000000;">Hráč @Model.Name2 vybírá pozice pěti lodí</h2>
             <div class="board" id="player-board">
                 <!-- Player's board will be dynamically generated here -->
                 <div class="cell1 empty-cell"></div> <!-- Prázdný čtvereček vlevo nahoře -->
@@ -93,50 +126,20 @@
                     <div class="cell1 empty-cell" disabled>@((char)('1' + row))</div>
                     @for (int col = 0; col < 5; col++)
                     {
-                        <div class="cell2" onclick="Play(@row,@col,'1')">@Model.GetCellSymbol(@gameManager.player1.Board.StringGrid[row, col])</div>
+                        <div class="cell2"></div>
                     }
                 }
             </div>
         </div>
-
-        <div style="text-align: center;">
-            <h2 style="color: #000000;">@Model.Nazev2</h2>
-            <div class="board" id="opponent-board">
-                <!-- Opponent's board will be dynamically generated here -->
-                <div class="cell1 empty-cell"></div> <!-- Prázdný čtvereček vlevo nahoře -->
-                @for (int row = 0; row < 5; row++)
-                {
-                    <div class="cell1 empty-cell">@((char)('A' + row))</div>
-                }
-                @for (int row = 0; row < 5; row++)
-                {
-                    <div class="cell1 empty-cell">@((char)('1' + row))</div>
-                    @for (int col = 0; col < 5; col++)
-                    {
-
-                        <div class="cell2" onclick="Play(@row,@col,'2')">@Model.GetCellSymbol(@gameManager.player2.Board.StringGrid[row, col])</div>
-
-                    }
-                }
-            </div>
+        <!-- Tlačítka vedle sebe -->
+        <div class="button-container">
+            <form method="Post">
+                <button type="submit" class="button" name="gameData" value="@Model.gm">Hotovo</button>
+            </form>
+            <form method="Post">
+                <button type="submit" class="button" asp-page-handler="Nahodne" name="gameData" value="@Model.gm">Náhodně</button>
+            </form>
         </div>
     </div>
-    <div class="message" id="message">Waiting for @gameManager.game._currentPlayer.Name</div>
 </body>
 </html>
-
-<script>
-    function Play(row, col, id) {
-        alert("play")
-        var combine = row + ',' + col + ',' + id;
-        $.ajax({
-            url: '?handler=Play&msg=' + combine,
-            success: function (data) {
-                
-            },
-            error: function (error) {
-                
-            }
-        })
-    }
-</script>

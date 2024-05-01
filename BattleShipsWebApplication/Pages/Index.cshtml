@@ -1,7 +1,5 @@
 ﻿@page
 @model IndexModel
-@{
-}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +10,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
+            background-color: #ADD8E6;
             padding-top: 50px;
             text-align: center;
         }
@@ -61,13 +59,18 @@
             button:hover {
                 background-color: #45a049;
             }
+
+        .explanation {
+            text-align: center; /* Zarovná vysvětlivky na střed */
+            margin-top: 20px; /* Zvýší odstup od formuláře */
+            width: 300px;
+            margin: 0 auto; /* Zarovná vodorovně na střed */
+        }
     </style>
 </head>
 <body>
     <h1>Battleship Game</h1>
     <form id="player-form" method="post">
-
-
         <label for="name1">Zadej jméno pro hráče 1:</label>
         <input type="text" id="name1" name="name1">
 
@@ -76,4 +79,15 @@
         <button type="submit">Start Game</button>
     </form>
     <p style="font-weight:bold ">@Model.Chyba</p>
+    <div class="explanation">
+        <p><strong>Vysvětlivky:</strong></p>
+        <ul style="list-style-type: none; padding-left: 0;">
+            <!-- Odstanění výchozího odrážkového seznamu a odsazení -->
+            <li>Obrázek 🚢 značí loď.</li>
+            <li>Obrázek 💥 značí zásah lodě.</li>
+            <li>Obrázek ❌ značí minutí lodě.</li>
+            <li>Obrázek 🌊 značí volná místa.</li>
+        </ul>
+    </div>
 </body>
+</html>

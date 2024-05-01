@@ -1,0 +1,71 @@
+﻿@page
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konec hry</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ADD8E6;
+            padding-top: 50px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column; /* Zarovnání obsahu ve sloupci */
+            align-items: center; /* Zarovnání obsahu na střed */
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%; /* Šířka kontejneru tlačítek */
+        }
+
+            .button-container .button {
+                background-color: #4CAF50; /* Zelená barva */
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                font-size: 16px;
+                margin: 0 10px; /* Odsazení mezi tlačítky */
+                cursor: pointer;
+                border-radius: 5px; /* Zakulacené rohy */
+                transition: background-color 0.3s ease; /* Animace při najetí myší */
+            }
+
+                .button-container .button:hover {
+                    background-color: #45a049;
+                }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Konec hry</h1>
+        <p class="message">Hráč kundolap vyhrál!</p>
+        <div class="button-container">
+            <form method="get" asp-page="/Index">
+                <button type="submit" class="button">Začít novou hru</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
