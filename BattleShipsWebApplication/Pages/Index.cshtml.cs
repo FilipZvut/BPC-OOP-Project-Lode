@@ -16,8 +16,7 @@ namespace projekt_lodě.Pages
 
         public void OnGet()
         {
-            Chyba = "";
-            
+            Chyba = "";            
         }
 
         public IActionResult OnPost()
@@ -41,7 +40,7 @@ namespace projekt_lodě.Pages
                 return Page();
             }
             else
-                return RedirectToPage("/uvodni", new { name1, name2 });
+                return RedirectToPage("/Game", new { name1, name2 });
         }
 
     }

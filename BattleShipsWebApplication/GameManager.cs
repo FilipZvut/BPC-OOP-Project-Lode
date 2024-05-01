@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Board;
 
 public class GameManager
 {
@@ -36,23 +37,27 @@ public class GameManager
 
     public Player GetAktualniHrac() {  return game._currentPlayer; }
 
-    void Main(string[] args)
+    public bool Play(int id)
     {
-        Game game = new Game(player1, player2);
-        game.PlaceShipsRandomly(game._player1);
-        game.PlaceShipsRandomly(game._player2);
-
-        while (true)
-        {
-            Console.WriteLine("Player's turn.");
-            Console.Write("Enter target row (0-9): ");
-            int row = int.Parse(Console.ReadLine());
-            Console.Write("Enter target column (0-9): ");
-            int col = int.Parse(Console.ReadLine());
-            game.Play(row, col);
-        }
+        game.Play(1,1);
+        return true;
     }
-        
+
+    public override string ToString()
+    {
+        string data = "";
+
+
+        for (int i = 0; i < Board.BoardLength; i++)
+        {
+            for (int j = 0; j < Board.BoardLength; j++)
+            {
+                data += player1.Board.StringGrid[i, j];
+            }
+            data += ";";
+        }
+        return data;
+    }
 
 
 }

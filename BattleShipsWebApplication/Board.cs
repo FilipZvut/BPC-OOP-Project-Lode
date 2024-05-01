@@ -9,11 +9,14 @@
         Miss
     }
 
+    public string[,] StringGrid;
+
     public CellState[,] _grid;
 
     public Board()
     {
         _grid = new CellState[BoardLength, BoardLength];
+        StringGrid = new string[BoardLength, BoardLength];
         InitializeGrid();
     }
 
@@ -26,6 +29,18 @@
                 _grid[i, j] = CellState.Empty;
             }
         }
+        UpdateStringGrid();
+    }
+
+    private void UpdateStringGrid()
+    {
+        for (int i = 0; i < BoardLength; i++)
+        {
+            for (int j = 0; j < BoardLength; j++)
+            {
+                StringGrid[i, j] = GetCellSymbol(_grid[i,j]);
+            }
+        }
     }
 
     public bool PlaceShip(int row, int col)
@@ -33,6 +48,7 @@
         if (_grid[row, col] == CellState.Empty)
         {
             _grid[row, col] = CellState.Ship;
+            UpdateStringGrid();
             return true;
         }
         return false;
@@ -43,11 +59,13 @@
         if (_grid[row, col] == CellState.Ship)
         {
             _grid[row, col] = CellState.Hit;
+            UpdateStringGrid();
             return true;
         }
         else
         {
             _grid[row, col] = CellState.Miss;
+            UpdateStringGrid();
             return false;
         }
     }
@@ -64,8 +82,37 @@
         return true;
     }
 
+    public string GetCellSymbol(CellState cellState)
+    {
+        switch (cellState)
+        {
+            case CellState.Empty:
+                return "🌊";
+            case CellState.Ship:
+                return "🚢";
+            case CellState.Hit:
+                return "💥";
+            case CellState.Miss:
+                return "❌";
+            default:
+                return "";
+        }
+    }
+
     public CellState[,] GetGrid()
     {
         return _grid;
     }
+
+    public void test()
+    {
+        _grid[0,0] = CellState.Miss;
+        UpdateStringGrid();
+    }
+
+    public String[,] GetStringGrid()
+    {
+        return StringGrid;
+    }
+
 }

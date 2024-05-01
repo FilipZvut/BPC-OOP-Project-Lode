@@ -1,5 +1,12 @@
 ﻿@page
-@model uvodniModel
+@model GameModel
+@{
+    ViewData["Title"] = "BattleShips";
+    GameManager gameManager = new GameManager();
+    gameManager.GameCreated(Model.Nazev1, Model.Nazev2);
+    gameManager.RandomPlace(1);
+    gameManager.RandomPlace(2);
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +43,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1rem;
+            font-size: 3rem;
             font-weight: bold;
             cursor: pointer; /* Změněno z 'pointer' na 'default' */
         }
@@ -53,15 +60,7 @@
         }
 
         .cell2:hover {
-            background-color: #808080; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
-        }
-
-        .hit {
-            background-color: #ff0000;
-        }
-
-        .miss {
-            background-color: #0000ff;
+            background-color: #58B6DE; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
         }
 
         .message {
@@ -82,8 +81,6 @@
 <body>
     <h1 style="text-align: center; color: #000000;">Battleship Game</h1>
     <div class="container">
-
-
         <div style="text-align: center; margin-right: 20px; font-style:bold">
             <h2 style="color: #000000;">@Model.Nazev1</h2>
             <div class="board" id="player-board">
@@ -98,8 +95,7 @@
                     <div class="cell1 empty-cell" disabled>@((char)('1' + row))</div>
                     @for (int col = 0; col < 5; col++)
                     {
-                        Board.CellState cellState = @Model.Grid1[row, col];
-                        <div class="cell2">@Model.GetCellSymbol(cellState)</div>
+                        <div class="cell2" onclick="Play(@row,@col,'1')">@gameManager.player1.Board.StringGrid[row, col]</div>
                     }
                 }
             </div>
@@ -119,13 +115,30 @@
                     <div class="cell1 empty-cell">@((char)('1' + row))</div>
                     @for (int col = 0; col < 5; col++)
                     {
-                        Board.CellState cellState = @Model.Grid2[row, col];
-                        <div class="cell2">@Model.GetCellSymbol(cellState)</div>
+
+                        <div class="cell2" onclick="Play(@row,@col,'2')">@gameManager.player2.Board.StringGrid[row, col]</div>
+
                     }
                 }
             </div>
         </div>
     </div>
-    <div class="message" id="message">Waiting for @Model.AktualniHrac.Name</div>
+    <div class="message" id="message">Waiting for @gameManager.game._currentPlayer.Name</div>
 </body>
 </html>
+
+<script>
+    function Play(row, col, id) {
+        alert("play")
+        var combine = row + ',' + col + ',' + id;
+        $.ajax({
+            url: '?handler=Play&msg=' + combine,
+            success: function (data) {
+                
+            },
+            error: function (error) {
+                
+            }
+        })
+    }
+</script>

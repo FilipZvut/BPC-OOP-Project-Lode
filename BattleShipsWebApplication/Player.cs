@@ -13,6 +13,11 @@
 
     public Board.CellState[,] GetGrid()
     {
-        return Board._grid;
+        return Board.GetGrid();
+    }
+
+    public String[,] GetStringGrid()
+    {
+        return Board.GetStringGrid();
     }
 }
