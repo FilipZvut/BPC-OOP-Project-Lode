@@ -22,7 +22,7 @@ public class Board
         InitializeGrid();
     }
 
-    private void InitializeGrid()
+    public void InitializeGrid()
     {
         for (int i = 0; i < BoardLength; i++)
         {
@@ -58,18 +58,23 @@ public class Board
 
     public bool Attack(int row, int col)
     {
-        if (_grid[row, col] == CellState.Ship)
+        if (_grid[row, col] != CellState.Miss && _grid[row, col] != CellState.Hit)
         {
-            _grid[row, col] = CellState.Hit;
-            UpdateStringGrid();
-            return true;
+            if (_grid[row, col] == CellState.Ship)
+            {
+                _grid[row, col] = CellState.Hit;
+                UpdateStringGrid();
+                return true;
+            }
+            else
+            {
+                _grid[row, col] = CellState.Miss;
+                UpdateStringGrid();
+                return true;
+            }
         }
         else
-        {
-            _grid[row, col] = CellState.Miss;
-            UpdateStringGrid();
             return false;
-        }
     }
 
     public bool AllShipsSunk()

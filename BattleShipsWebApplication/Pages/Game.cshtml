@@ -116,7 +116,14 @@
                     <div class="cell1 empty-cell" disabled>@((char)('1' + row))</div>
                     @for (int col = 0; col < 5; col++)
                     {
-                        <div class="cell2" onclick="Play(@row,@col,'1')">@Model.GetCellSymbol(@gameManager.player1.Board.StringGrid[row, col])</div>
+                        <div class="cell2">
+                            <form method="Post">
+                                <input type="hidden" name="row" value="@row" /> <!-- Skryté pole pro první argument -->
+                                <input type="hidden" name="col" value="@col" /> <!-- Skryté pole pro druhý argument -->
+                                <input type="hidden" name="id" value="@gameManager.player2.Id" /> <!-- Skryté pole pro druhý argument -->
+                                <button class="cell2T" asp-page-handler="Nahodne" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.player1.Board.StringGrid[row, col])</button>
+                            </form>
+                        </div>
                     }
                 }
             </div>
@@ -136,10 +143,12 @@
                     <div class="cell1 empty-cell">@((char)('1' + row))</div>
                     @for (int col = 0; col < 5; col++)
                     {
-                        var cellId = $"{row},{col}"; // Vytvoření ID buňky
                         <div class="cell2">
                             <form method="Post">
-                            <button class="cell2T" asp-page-handler="Nahodne" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.player2.Board.StringGrid[row, col])</button>
+                                <input type="hidden" name="row" value="@row" /> <!-- Skryté pole pro první argument -->
+                                <input type="hidden" name="col" value="@col" />
+                                <input type="hidden" name="id" value="@gameManager.player1.Id" /><!-- Skryté pole pro druhý argument -->
+                                <button class="cell2T" asp-page-handler="Nahodne" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.player2.Board.StringGrid[row, col])</button>
                             </form>
                         </div>
 

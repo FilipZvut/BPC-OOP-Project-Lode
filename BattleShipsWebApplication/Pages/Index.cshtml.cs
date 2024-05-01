@@ -25,7 +25,7 @@ namespace projekt_lodě.Pages
             var name1 = Request.Form["name1"];
             var name2 = Request.Form["name2"];
             GameManager gameManager = new GameManager();
-            gameManager.GameCreated(name1, name2);
+            gameManager.GameCreated(name1, name2,1);
             var data = gameManager.ToString();
 
 

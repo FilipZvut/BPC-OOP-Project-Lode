@@ -42,10 +42,23 @@ public class GameModel : PageModel
     {
         var data = gamedata;
         GameManager gameManager = new GameManager(data);
-        gameManager.Play(0, 0, 1);
+        string row = Request.Form["row"];
+        string col = Request.Form["col"];
+        string id = Request.Form["id"];
+
+        // Zde můžete provést další zpracování hodnot, například převést je na čísla, pokud jsou ve formátu řetězce
+        int rowINT = int.Parse(row);
+        int colINT = int.Parse(col);
+        int idINT = int.Parse(id);
+        gameManager.Play(rowINT, colINT, idINT);
         data = gameManager.ToString();
-        _logger.LogWarning(data);
-        return RedirectToPage("/game", new { data });
+        _logger.LogWarning($"{rowINT}, {colINT}, {idINT}");
+        if (gameManager.TestVyhry() == 0)
+            return RedirectToPage("/game", new { data });
+        else if (gameManager.TestVyhry() == 1)
+            return RedirectToPage("/konec", new { gameManager.player2.Name });
+        else
+            return RedirectToPage("/konec", new { gameManager.player1.Name });
     }
 
     public string GetCellSymbol(string cellState)

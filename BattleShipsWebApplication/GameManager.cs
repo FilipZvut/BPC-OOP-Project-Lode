@@ -22,14 +22,14 @@ public class GameManager
     }
 
 
-    public void GameCreated(string name1, string name2)
+    public void GameCreated(string name1, string name2, int id)
     {
 
         player1 = new Player(1, name1);
         
         player2 = new Player(2, name2);
         
-        game = new Game(player1, player2);
+        game = new Game(player1, player2, id);
 
     }
 
@@ -41,11 +41,46 @@ public class GameManager
             game.PlaceShipsRandomly(game._player2);       
     }
 
-    public void SelectPlaceShips(int id)
+    public bool SelectPlaceShips(int row, int col, int id)
     {
+        if (id == 1)
+        {
+            player1.Board.PlaceShip(row, col);
+            if (PocetLodi(1) == 5)
+                return true;
+            return false;
+        }
+        else
+        {
+            player2.Board.PlaceShip(row, col);
+            if (PocetLodi(2) == 5)
+                return true;
+            return false;
+        }
 
     }
 
+    public int PocetLodi(int id)
+    {
+        int PocetLodi = 0;
+        Board.CellState[,] grid; 
+        if(id == 1)
+            grid = game._player1.GetGrid();
+        else
+            grid = game._player2.GetGrid();
+
+
+        for (int i = 0; i < BoardLength; i++)
+        {
+            for (int j = 0; j < BoardLength; j++)
+            {
+                if (grid[i, j] == Board.CellState.Ship)
+                    PocetLodi++;
+            }
+        }
+
+        return PocetLodi;
+    }
     public Player GetAktualniHrac() {  return game._currentPlayer; }
 
     public bool Play(int row, int col, int id)
@@ -106,14 +141,11 @@ public class GameManager
     public void FromString(string oldGame)
     {
         string[] data = oldGame.Split(';');
-        GameCreated(data[0], data[1]);
+        
+        GameCreated(data[0], data[1], int.Parse(data[4]));
+
         player1.Board.SetupGrid(data[2]);
         player2.Board.SetupGrid(data[3]);
-        if (data[4]=="1")
-            game._currentPlayer = player1;
-        else 
-            game._currentPlayer = player2;
-
     }
 
 

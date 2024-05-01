@@ -1,10 +1,10 @@
-using Microsoft.AspNetCore.Components.Web;
+ï»¿using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
-namespace projekt_lodì.Pages
+namespace projekt_lodÄ›.Pages
 {
 
 
@@ -14,7 +14,7 @@ namespace projekt_lodì.Pages
         public string Chyba { get; set; }
         public string Name1 { get; set; }
         public string Name2 { get; set; }
-        public int VybraneLode { get; set; } // Promìnná pro sledování poètu vybranıch lodí
+        public int VybraneLode { get; set; } // PromÄ›nnÃ¡ pro sledovÃ¡nÃ­ poÄtu vybranÃ½ch lodÃ­
 
         public string gm { get; set; }
 
@@ -22,48 +22,41 @@ namespace projekt_lodì.Pages
         {
             _logger = logger;
             Chyba = "";
-            VybraneLode = 0; // Nastavení poètu vybranıch lodí na zaèátku
+            VybraneLode = 0; // NastavenÃ­ poÄtu vybranÃ½ch lodÃ­ na zaÄÃ¡tku
         }
 
         public void OnGet(string data)
         {
             Chyba = "";
             GameManager gameManager = new GameManager(data);
-            //gameManager.RandomPlace(1);
             gm = gameManager.ToString();
             Name1 = gameManager.player1.Name;
             Name2 = gameManager.player2.Name;
 
         }
 
-        public IActionResult OnPost(string gamedata, string gameButton)
+        public IActionResult OnPostSelect(string gamedata)
         {
-            VybraneLode++; // Inkrementace poètu vybranıch lodí po kadém postu
-
-            if (gamedata == "nahodne")
+            // Inkrementace poÄtu vybranÃ½ch lodÃ­ po kaÅ¾dÃ©m postu
+            
+            
+            string row = Request.Form["row"];
+            string col = Request.Form["col"];
+            var data = gamedata;
+            GameManager gameManager = new GameManager(data);
+            if(gameManager.SelectPlaceShips(int.Parse(row), int.Parse(col),1))
             {
-                var data = gm;
-                GameManager gameManager = new GameManager(data);
-                //gameManager.RandomPlace(1);
                 data = gameManager.ToString();
-                return RedirectToPage("/Vyber2", new { data });
-            }
-            //Pokud jsou vybrány všechny lodì(5), pøesmìruj na úvodní stránku
-            if (true)
-            {
-                _logger.LogInformation("Volana metoda onPost");
-                var data = gamedata;
-                GameManager gm = new GameManager(data);
-                //gm.RandomPlace(1);
-                data = gm.ToString();
+            _logger.LogInformation("Volana metoda onPost");
                 return RedirectToPage("/Vyber2", new { data });
             }
             else
             {
-                var data = gamedata;
-                Chyba = "Vybrali jste " + VybraneLode + " lodí, vyberte další."; // Informace o poètu vybranıch lodí
-                return RedirectToPage("/Vyber", new { data }); // Zùstaò na stejné stránce
+                data = gameManager.ToString();
+                return RedirectToPage("/Vyber", new { data });
             }
+            
+            
         }
 
         public IActionResult OnPostNahodne(string gamedata)
@@ -75,5 +68,24 @@ namespace projekt_lodì.Pages
             _logger.LogWarning("hrac1 nahodne");
             return RedirectToPage("/Vyber2", new { data });
         }
+
+        public string GetCellSymbol(string cellState)
+        {
+            switch (cellState)
+            {
+                case "@":
+                    return "ğŸŒŠ";
+                case "@@":
+                    return "ğŸš¢";
+                case "@@@":
+                    return "ğŸ’¥";
+                case "@@@@":
+                    return "âŒ";
+                default:
+                    return "";
+            }
+        }
     }
+    
+
 }

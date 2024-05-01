@@ -1,4 +1,5 @@
 ﻿@page
+@model KonecModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +61,7 @@
 <body>
     <div class="container">
         <h1>Konec hry</h1>
-        <p class="message">Hráč kundolap vyhrál!</p>
+        <p class="message">Hráč @Model.Winner vyhrál!</p>
         <div class="button-container">
             <form method="get" asp-page="/Index">
                 <button type="submit" class="button">Začít novou hru</button>

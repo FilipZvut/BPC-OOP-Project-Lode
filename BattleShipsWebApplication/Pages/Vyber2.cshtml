@@ -1,5 +1,8 @@
 ﻿@page
 @model Vyber2Model
+@{
+    GameManager gameManager = new GameManager(Model.gm);
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +64,19 @@
         }
 
         .cell2:hover {
-            background-color: #808080; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
+            background-color: #58B6DE; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
+        }
+
+        .cell2T {
+            border: 0px solid #999;
+            background-color: #87CEFA;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            block-size: 5rem;
+            font-weight: bold;
+            cursor: pointer; /* Změněno z 'pointer' na 'default' */
         }
 
         .hit {
@@ -104,6 +119,10 @@
                 background-color: #45a049;
             }
 
+        .cell2T:hover {
+            background-color: #58B6DE; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
+        }
+
         /* Styl pro tlačítka vedle sebe */
         .button-container {
             display: flex;
@@ -133,16 +152,19 @@
                     <div class="cell1 empty-cell" disabled>@((char)('1' + row))</div>
                     @for (int col = 0; col < 5; col++)
                     {
-                        <div class="cell2"></div>
+                        <div class="cell2">
+                            <form method="Post">
+                                <input type="hidden" name="row" value="@row" /> <!-- Skryté pole pro první argument -->
+                                <input type="hidden" name="col" value="@col" /> <!-- Skryté pole pro druhý argument -->
+                                <button class="cell2T" asp-page-handler="Select" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.player2.Board.StringGrid[row, col])</button>
+                            </form>
+                        </div>
                     }
                 }
             </div>
         </div>
         <!-- Tlačítka vedle sebe -->
         <div class="button-container">
-            <form method="Post">
-                <button type="submit" class="button" name="gameData" value="@Model.gm">Hotovo</button>
-            </form>
             <form method="Post">
                 <button type="submit" class="button" asp-page-handler="Nahodne" name="gameData" value="@Model.gm">Náhodně</button>
             </form>
