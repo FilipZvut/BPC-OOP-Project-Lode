@@ -68,7 +68,7 @@ public class GameModel : PageModel
             case "@":
                 return "🌊";
             case "@@":
-                return "🚢";
+                return "🌊";
             case "@@@":
                 return "💥";
             case "@@@@":

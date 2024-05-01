@@ -10,6 +10,7 @@ public class GameManager
     public Player player1;
     public Player player2;
     public Game game;
+    public const int Pocet = 7;
 
     public GameManager()
     {
@@ -46,14 +47,14 @@ public class GameManager
         if (id == 1)
         {
             player1.Board.PlaceShip(row, col);
-            if (PocetLodi(1) == 5)
+            if (PocetLodi(1) == Pocet)
                 return true;
             return false;
         }
         else
         {
             player2.Board.PlaceShip(row, col);
-            if (PocetLodi(2) == 5)
+            if (PocetLodi(2) == Pocet)
                 return true;
             return false;
         }

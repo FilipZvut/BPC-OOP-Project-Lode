@@ -26,7 +26,7 @@ public class Game
         player.Board.InitializeGrid();
 
         Random random = new Random();
-        while(ShipsPlaced<5)
+        while(ShipsPlaced<GameManager.Pocet)
         {
             random.Next();
             int row = random.Next(0, Board.BoardLength);
