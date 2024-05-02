@@ -139,7 +139,7 @@
     <h1 style="text-align: center; color: #000000;">Battleship Game</h1>
     <div class="container">
         <div style="text-align: center; margin-right: 20px; font-style:bold">
-            <h2 style="color: #000000;">Hráč @Model.Name2 vybírá pozice lodí (@gameManager.PocetLodi(2) / @GameManager.Pocet)</h2>
+            <h2 style="color: #000000;">Hráč @Model.Name2 vybírá pozice lodí (@gameManager.ShipNumber(2) / @GameManager.SHIPS)</h2>
             <div class="board" id="player-board">
                 <!-- Player's board will be dynamically generated here -->
                 <div class="cell1 empty-cell"></div> <!-- Prázdný čtvereček vlevo nahoře -->
@@ -156,7 +156,7 @@
                             <form method="Post">
                                 <input type="hidden" name="row" value="@row" /> <!-- Skryté pole pro první argument -->
                                 <input type="hidden" name="col" value="@col" /> <!-- Skryté pole pro druhý argument -->
-                                <button class="cell2T" asp-page-handler="Select" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.player2.Board.StringGrid[row, col])</button>
+                                <button class="cell2T" asp-page-handler="Select" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.Player2.StringGrid[row, col])</button>
                             </form>
                         </div>
                     }

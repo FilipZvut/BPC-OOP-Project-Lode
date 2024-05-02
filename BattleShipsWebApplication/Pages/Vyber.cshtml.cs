@@ -24,8 +24,8 @@ public class VyberModel : PageModel
         Chyba = "";
         GameManager gameManager = new GameManager(data);
         gm = gameManager.ToString();
-        Name1 = gameManager.player1.Name;
-        Name2 = gameManager.player2.Name;
+        Name1 = gameManager.Player1.Name;
+        Name2 = gameManager.Player2.Name;
     }
     public IActionResult OnPostSelect(string gamedata)
     {

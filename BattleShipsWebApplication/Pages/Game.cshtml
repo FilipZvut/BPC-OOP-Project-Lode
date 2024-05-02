@@ -120,8 +120,8 @@
                             <form method="Post">
                                 <input type="hidden" name="row" value="@row" /> <!-- Skryté pole pro první argument -->
                                 <input type="hidden" name="col" value="@col" /> <!-- Skryté pole pro druhý argument -->
-                                <input type="hidden" name="id" value="@gameManager.player2.Id" /> <!-- Skryté pole pro druhý argument -->
-                                <button class="cell2T" asp-page-handler="Nahodne" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.player1.Board.StringGrid[row, col])</button>
+                                <input type="hidden" name="id" value="@gameManager.Player2.Id" /> <!-- Skryté pole pro druhý argument -->
+                                <button class="cell2T" asp-page-handler="Nahodne" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.Player1.StringGrid[row, col])</button>
                             </form>
                         </div>
                     }
@@ -147,8 +147,8 @@
                             <form method="Post">
                                 <input type="hidden" name="row" value="@row" /> <!-- Skryté pole pro první argument -->
                                 <input type="hidden" name="col" value="@col" />
-                                <input type="hidden" name="id" value="@gameManager.player1.Id" /><!-- Skryté pole pro druhý argument -->
-                                <button class="cell2T" asp-page-handler="Nahodne" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.player2.Board.StringGrid[row, col])</button>
+                                <input type="hidden" name="id" value="@gameManager.Player1.Id" /><!-- Skryté pole pro druhý argument -->
+                                <button class="cell2T" asp-page-handler="Nahodne" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.Player2.StringGrid[row, col])</button>
                             </form>
                         </div>
 
@@ -157,7 +157,7 @@
             </div>
         </div>
     </div>
-    <div class="message" id="message">Waiting for @gameManager.game._currentPlayer.Name</div>
+    <div class="message" id="message">Waiting for @gameManager.CurrentPlayer.Name</div>
 </body>
 </html>
 

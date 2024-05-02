@@ -1,5 +1,6 @@
 ﻿using static Battleships.Logic.GameManager;
 namespace Battleships.Logic;
+
 public class Board
 {
     private string[,] _stringGrid;
@@ -18,15 +19,15 @@ public class Board
 
     public Board()
     {
-        _grid = new CellState[BoardLength, BoardLength];
-        _stringGrid = new string[BoardLength, BoardLength];
+        _grid = new CellState[BOARDLENGTH, BOARDLENGTH];
+        _stringGrid = new string[BOARDLENGTH, BOARDLENGTH];
         InitializeGrid();
     }
     public void InitializeGrid()
     {
-        for (int i = 0; i < BoardLength; i++)
+        for (int i = 0; i < BOARDLENGTH; i++)
         {
-            for (int j = 0; j < BoardLength; j++)
+            for (int j = 0; j < BOARDLENGTH; j++)
             {
                 _grid[i, j] = CellState.Empty;
             }
@@ -35,9 +36,9 @@ public class Board
     }
     private void UpdateStringGrid()
     {
-        for (int i = 0; i < BoardLength; i++)
+        for (int i = 0; i < BOARDLENGTH; i++)
         {
-            for (int j = 0; j < BoardLength; j++)
+            for (int j = 0; j < BOARDLENGTH; j++)
             {
                 _stringGrid[i, j] = GetCellSymbol(_grid[i,j]);
             }
@@ -103,10 +104,10 @@ public class Board
     public void SetupGrid(string oldgrid)
     {
         string[] dataradky = oldgrid.Split(',');
-        for(int i =0; i < BoardLength; i++)
+        for(int i =0; i < BOARDLENGTH; i++)
         {
             string[] dataPolozky = dataradky[i].Split('.');
-            for(int j = 0; j < BoardLength; j++)
+            for(int j = 0; j < BOARDLENGTH; j++)
             {
                 _stringGrid[i,j] = dataPolozky[j];
             }
@@ -115,9 +116,9 @@ public class Board
     }
     public void UpdateGrid()
     {
-        for (int i = 0; i < BoardLength; i++)
+        for (int i = 0; i < BOARDLENGTH; i++)
         {
-            for (int j = 0; j < BoardLength; j++)
+            for (int j = 0; j < BOARDLENGTH; j++)
             {
                 _grid[i, j] = GetCellState(_stringGrid[i,j]);
             }

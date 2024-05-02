@@ -21,8 +21,8 @@ public class GameModel : PageModel
     {
         gm = data;
         GameManager gameManager = new GameManager(data);
-        Nazev1 = gameManager.player1.Name;
-        Nazev2 = gameManager.player2.Name;
+        Nazev1 = gameManager.Player1.Name;
+        Nazev2 = gameManager.Player2.Name;
     }
 
     public IActionResult OnPostPlay(string gamedata)
@@ -55,9 +55,9 @@ public class GameModel : PageModel
         if (gameManager.TestVyhry() == 0)
             return RedirectToPage("/game", new { data });
         else if (gameManager.TestVyhry() == 1)
-            return RedirectToPage("/konec", new { gameManager.player2.Name });
+            return RedirectToPage("/konec", new { gameManager.Player2.Name });
         else
-            return RedirectToPage("/konec", new { gameManager.player1.Name });
+            return RedirectToPage("/konec", new { gameManager.Player1.Name });
     }
 
     public string GetCellSymbol(string cellState)
