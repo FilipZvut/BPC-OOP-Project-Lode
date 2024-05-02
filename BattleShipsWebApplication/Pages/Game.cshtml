@@ -37,7 +37,7 @@
             width: 500px;
             height: 500px;
             display: grid;
-            grid-template-columns: repeat(6, 1fr); /* Přidáme jednu sloupcovou buňku navíc pro označení řádků a sloupců */
+            grid-template-columns: repeat(6, 1fr);
             grid-template-rows: repeat(6, 1fr);
             gap: 1px;
         }
@@ -50,7 +50,7 @@
             align-items: center;
             font-size: 3rem;
             font-weight: bold;
-            cursor: pointer; /* Změněno z 'pointer' na 'default' */
+            cursor: pointer;
         }
 
         .cell2T {
@@ -62,7 +62,7 @@
             font-size: 3rem;
             block-size: 5rem;
             font-weight: bold;
-            cursor: pointer; /* Změněno z 'pointer' na 'default' */
+            cursor: pointer;
         }
 
         .cell1 {
@@ -73,15 +73,15 @@
             align-items: center;
             font-size: 1rem;
             font-weight: bold;
-            cursor: default; /* Změněno z 'pointer' na 'default' */
+            cursor: default;
         }
 
         .cell2:hover {
-            background-color: #58B6DE; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
+            background-color: #58B6DE;
         }
 
         .cell2T:hover {
-            background-color: #58B6DE; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
+            background-color: #58B6DE;
         }
 
         .message {
@@ -93,7 +93,6 @@
             color: black;
         }
 
-        /* Nový styl pro první čtvereček vlevo nahoře */
         .empty-cell {
             background-color: #24D0F2
         }
@@ -105,8 +104,7 @@
         <div style="text-align: center; margin-right: 20px; font-style:bold">
             <h2 style="color: #000000;">@Model.Nazev1</h2>
             <div class="board" id="player-board">
-                <!-- Player's board will be dynamically generated here -->
-                <div class="cell1 empty-cell"></div> <!-- Prázdný čtvereček vlevo nahoře -->
+                <div class="cell1 empty-cell"></div>
                 @for (int row = 0; row < 5; row++)
                 {
                     <div class="cell1 empty-cell" disabled>@((char)('A' + row))</div>
@@ -118,9 +116,9 @@
                     {
                         <div class="cell2">
                             <form method="Post">
-                                <input type="hidden" name="row" value="@row" /> <!-- Skryté pole pro první argument -->
-                                <input type="hidden" name="col" value="@col" /> <!-- Skryté pole pro druhý argument -->
-                                <input type="hidden" name="id" value="@gameManager.Player2.Id" /> <!-- Skryté pole pro druhý argument -->
+                                <input type="hidden" name="row" value="@row" />
+                                <input type="hidden" name="col" value="@col" />
+                                <input type="hidden" name="id" value="@gameManager.Player2.Id" />
                                 <button class="cell2T" asp-page-handler="" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.Player1.StringGrid[row, col])</button>
                             </form>
                         </div>
@@ -132,8 +130,7 @@
         <div style="text-align: center;">
             <h2 style="color: #000000;">@Model.Nazev2</h2>
             <div class="board" id="opponent-board">
-                <!-- Opponent's board will be dynamically generated here -->
-                <div class="cell1 empty-cell"></div> <!-- Prázdný čtvereček vlevo nahoře -->
+                <div class="cell1 empty-cell"></div>
                 @for (int row = 0; row < 5; row++)
                 {
                     <div class="cell1 empty-cell">@((char)('A' + row))</div>
@@ -145,9 +142,9 @@
                     {
                         <div class="cell2">
                             <form method="Post">
-                                <input type="hidden" name="row" value="@row" /> <!-- Skryté pole pro první argument -->
+                                <input type="hidden" name="row" value="@row" />
                                 <input type="hidden" name="col" value="@col" />
-                                <input type="hidden" name="id" value="@gameManager.Player1.Id" /><!-- Skryté pole pro druhý argument -->
+                                <input type="hidden" name="id" value="@gameManager.Player1.Id" />
                                 <button class="cell2T" asp-page-handler="" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.Player2.StringGrid[row, col])</button>
                             </form>
                         </div>

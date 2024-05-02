@@ -26,8 +26,8 @@
 
         .container {
             display: flex;
-            flex-direction: column; /* Zarovnání obsahu ve sloupci */
-            align-items: center; /* Zarovnání obsahu na střed */
+            flex-direction: column;
+            align-items: center;
         }
 
         .board {
@@ -36,7 +36,7 @@
             width: 500px;
             height: 500px;
             display: grid;
-            grid-template-columns: repeat(6, 1fr); /* Přidáme jednu sloupcovou buňku navíc pro označení řádků a sloupců */
+            grid-template-columns: repeat(6, 1fr);
             grid-template-rows: repeat(6, 1fr);
             gap: 1px;
         }
@@ -49,7 +49,7 @@
             align-items: center;
             font-size: 1rem;
             font-weight: bold;
-            cursor: pointer; /* Změněno z 'pointer' na 'default' */
+            cursor: pointer;
         }
 
         .cell1 {
@@ -60,11 +60,11 @@
             align-items: center;
             font-size: 1rem;
             font-weight: bold;
-            cursor: default; /* Změněno z 'pointer' na 'default' */
+            cursor: default;
         }
 
         .cell2:hover {
-            background-color: #58B6DE; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
+            background-color: #58B6DE;
         }
 
         .cell2T {
@@ -76,7 +76,7 @@
             font-size: 3rem;
             block-size: 5rem;
             font-weight: bold;
-            cursor: pointer; /* Změněno z 'pointer' na 'default' */
+            cursor: pointer;
         }
 
         .hit {
@@ -96,14 +96,12 @@
             color: black;
         }
 
-        /* Nový styl pro první čtvereček vlevo nahoře */
         .empty-cell {
             background-color: #24D0F2
         }
 
-        /* Styl pro tlačítka */
         .button {
-            background-color: #4CAF50; /* Zelená barva */
+            background-color: #4CAF50;
             border: none;
             color: white;
             padding: 15px 32px;
@@ -114,25 +112,23 @@
             cursor: pointer;
         }
 
-            /* Styl pro tlačítko po najetí myší */
-            .button:hover {
-                background-color: #45a049;
-            }
-
-        .cell2T:hover {
-            background-color: #58B6DE; /* Barva pozadí při najetí myší změněna na stejnou jako normálně */
+        .button:hover {
+            background-color: #45a049;
         }
 
-        /* Styl pro tlačítka vedle sebe */
+        .cell2T:hover {
+            background-color: #58B6DE;
+        }
+
         .button-container {
             display: flex;
             justify-content: center;
             margin-top: 20px;
         }
 
-            .button-container .button {
-                margin: 0 10px; /* Odsazení mezi tlačítky */
-            }
+        .button-container .button {
+            margin: 0 10px;
+        }
     </style>
 </head>
 <body>
@@ -141,8 +137,7 @@
         <div style="text-align: center; margin-right: 20px">
             <h2 style="color: #000000;">Hráč @Model.Name2 vybírá pozice lodí (@gameManager.ShipNumber(2) / @GameManager.SHIPS)</h2>
             <div class="board" id="player-board">
-                <!-- Player's board will be dynamically generated here -->
-                <div class="cell1 empty-cell"></div> <!-- Prázdný čtvereček vlevo nahoře -->
+                <div class="cell1 empty-cell"></div>
                 @for (int row = 0; row < 5; row++)
                 {
                     <div class="cell1 empty-cell" disabled>@((char)('A' + row))</div>
@@ -154,8 +149,8 @@
                     {
                         <div class="cell2">
                             <form method="Post">
-                                <input type="hidden" name="row" value="@row" /> <!-- Skryté pole pro první argument -->
-                                <input type="hidden" name="col" value="@col" /> <!-- Skryté pole pro druhý argument -->
+                                <input type="hidden" name="row" value="@row" />
+                                <input type="hidden" name="col" value="@col" />
                                 <button class="cell2T" asp-page-handler="Select" name="gameData" value="@gameManager.ToString()">@Model.GetCellSymbol(@gameManager.Player2.StringGrid[row, col])</button>
                             </form>
                         </div>
@@ -163,7 +158,6 @@
                 }
             </div>
         </div>
-        <!-- Tlačítka vedle sebe -->
         <div class="button-container">
             <form method="Post">
                 <button type="submit" class="button" asp-page-handler="Nahodne" name="gameData" value="@gameManager.ToString()">Náhodně</button>
