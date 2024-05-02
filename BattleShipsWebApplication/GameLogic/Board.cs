@@ -1,7 +1,6 @@
 ﻿using static Battleships.Logic.GameManager;
 
 namespace Battleships.Logic;
-
 public class Board
 {
     private string[,] _stringGrid;
