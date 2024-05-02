@@ -32,7 +32,7 @@ public class Game
         player.Board.InitializeGrid();
 
         Random random = new Random();
-        while(ShipsPlaced<SHIPS)
+        while (ShipsPlaced < SHIPS)
         {
             random.Next();
             int row = random.Next(0, BOARDLENGTH);
@@ -40,14 +40,14 @@ public class Game
             int col = random.Next(0, BOARDLENGTH);
             if (player.Board.PlaceShip(row, col))
                 ShipsPlaced++;
-            
+
         }
     }
     public void Play(int row, int col)
     {
-        if(_opponent.Board.Attack(row, col))
+        if (_opponent.Board.Attack(row, col))
             SwitchTurn();
-        
+
     }
     private void SwitchTurn()
     {

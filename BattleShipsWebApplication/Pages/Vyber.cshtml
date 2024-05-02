@@ -137,7 +137,7 @@
 <body>
     <h1 style="text-align: center; color: #000000;">Battleship Game</h1>
     <div class="container">
-        <div style="text-align: center; margin-right: 20px; font-style:bold">
+        <div style="text-align: center; margin-right: 20px">
             <h2 style="color: #000000;">Hráč @Model.Name1 vybírá pozice lodí (@gameManager.ShipNumber(1) / @GameManager.SHIPS)</h2>
             <div class="board" id="player-board">
                 <!-- Player's board will be dynamically generated here -->
@@ -165,7 +165,7 @@
         <!-- Tlačítka vedle sebe -->
         <div class="button-container">
             <form method="Post">
-                <button type="submit" class="button" asp-page-handler="Nahodne" name="gameData" value="@Model.gm">Náhodně</button>
+                <button type="submit" class="button" asp-page-handler="Nahodne" name="gameData" value="@gameManager.ToString()">Náhodně</button>
             </form>
         </div>
     </div>

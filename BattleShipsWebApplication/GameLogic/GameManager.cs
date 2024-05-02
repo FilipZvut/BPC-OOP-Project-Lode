@@ -37,8 +37,9 @@ public class GameManager
     {
         if(id == 1)
             _game.PlaceShipsRandomly(_player1);
-        else
-            _game.PlaceShipsRandomly(_player1);       
+        else if(id == 2) 
+            _game.PlaceShipsRandomly(_player2);
+        
     }
 
     public bool SelectPlaceShips(int row, int col, int id)

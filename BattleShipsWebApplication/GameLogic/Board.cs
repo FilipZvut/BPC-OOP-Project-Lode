@@ -1,4 +1,5 @@
 ﻿using static Battleships.Logic.GameManager;
+
 namespace Battleships.Logic;
 
 public class Board

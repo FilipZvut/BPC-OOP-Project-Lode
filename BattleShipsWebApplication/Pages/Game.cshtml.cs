@@ -1,17 +1,14 @@
+using Battleships.Logic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Battleships.Logic;
 
 namespace Battleships.Pages;
 public class GameModel : PageModel
 {
+    private readonly ILogger<GameModel> _logger;
     public string Nazev1 { get; set; }
     public string Nazev2 { get; set; }
     public string gm { get; set; }
-
-
-    
-    private readonly ILogger<GameModel> _logger;
 
     public GameModel(ILogger<GameModel> logger)
     {
@@ -24,20 +21,7 @@ public class GameModel : PageModel
         Nazev1 = gameManager.Player1.Name;
         Nazev2 = gameManager.Player2.Name;
     }
-
-    public IActionResult OnPostPlay(string gamedata)
-    {
-         
-        var data = gamedata;
-        GameManager gameManager = new GameManager(data);
-
-
-        _logger.LogInformation(data);
-
-        return Page();
-    }
-
-    public IActionResult OnPostNahodne(string gamedata)
+    public IActionResult OnPost(string gamedata)
     {
         var data = gamedata;
         GameManager gameManager = new GameManager(data);
@@ -45,13 +29,13 @@ public class GameModel : PageModel
         string col = Request.Form["col"];
         string id = Request.Form["id"];
 
-        // Zde můžete provést další zpracování hodnot, například převést je na čísla, pokud jsou ve formátu řetězce
         int rowINT = int.Parse(row);
         int colINT = int.Parse(col);
         int idINT = int.Parse(id);
         gameManager.Play(rowINT, colINT, idINT);
         data = gameManager.ToString();
-        _logger.LogWarning($"{rowINT}, {colINT}, {idINT}");
+        _logger.LogInformation($"Player{idINT} played: {rowINT},{colINT}");
+
         if (gameManager.TestVyhry() == 0)
             return RedirectToPage("/game", new { data });
         else if (gameManager.TestVyhry() == 1)
@@ -67,7 +51,7 @@ public class GameModel : PageModel
             case "@":
                 return "🌊";
             case "@@":
-                return "🌊";
+                return "🌊";//🚢
             case "@@@":
                 return "💥";
             case "@@@@":
