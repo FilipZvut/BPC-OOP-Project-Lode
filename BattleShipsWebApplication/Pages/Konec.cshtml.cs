@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-
+namespace Battleships.Pages;
 public class KonecModel : PageModel
 {
     public string Winner { get; set; }

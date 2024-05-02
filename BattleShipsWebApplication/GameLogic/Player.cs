@@ -1,4 +1,5 @@
-﻿public class Player
+﻿namespace Battleships.Logic;
+public class Player
 {
     public Board Board { get; set; }
     public int Id { get; init; }
@@ -11,13 +12,7 @@
         Name = name;
     }
 
-    public Board.CellState[,] GetGrid()
-    {
-        return Board.GetGrid();
-    }
+    public Board.CellState[,] Grid { get { return Board.Grid;} }
+    public String[,] StringGrid { get { return Board.StringGrid; } }
 
-    public String[,] GetStringGrid()
-    {
-        return Board.GetStringGrid();
-    }
 }

@@ -1,6 +1,13 @@
-﻿public class Board
+﻿using static Battleships.Logic.GameManager;
+namespace Battleships.Logic;
+public class Board
 {
-    public const int BoardLength = 5;
+    private string[,] _stringGrid;
+    private CellState[,] _grid;
+
+    public CellState[,] Grid {  get { return _grid; } }
+    public string[,] StringGrid { get { return _stringGrid; } }
+    
     public enum CellState
     {
         Empty,
@@ -9,17 +16,12 @@
         Miss
     }
 
-    public string[,] StringGrid;
-
-    public CellState[,] _grid;
-
     public Board()
     {
         _grid = new CellState[BoardLength, BoardLength];
-        StringGrid = new string[BoardLength, BoardLength];
+        _stringGrid = new string[BoardLength, BoardLength];
         InitializeGrid();
     }
-
     public void InitializeGrid()
     {
         for (int i = 0; i < BoardLength; i++)
@@ -31,18 +33,16 @@
         }
         UpdateStringGrid();
     }
-
     private void UpdateStringGrid()
     {
         for (int i = 0; i < BoardLength; i++)
         {
             for (int j = 0; j < BoardLength; j++)
             {
-                StringGrid[i, j] = GetCellSymbol(_grid[i,j]);
+                _stringGrid[i, j] = GetCellSymbol(_grid[i,j]);
             }
         }
     }
-
     public bool PlaceShip(int row, int col)
     {
         if (_grid[row, col] == CellState.Empty)
@@ -53,7 +53,6 @@
         }
         return false;
     }
-
     public bool Attack(int row, int col)
     {
         if (_grid[row, col] != CellState.Miss && _grid[row, col] != CellState.Hit)
@@ -74,7 +73,6 @@
         else
             return false;
     }
-
     public bool AllShipsSunk()
     {
         foreach (var cell in _grid)
@@ -86,8 +84,7 @@
         }
         return true;
     }
-
-    public string GetCellSymbol(CellState cellState)
+    private string GetCellSymbol(CellState cellState)
     {
         switch (cellState)
         {
@@ -103,18 +100,6 @@
                 return "";
         }
     }
-
-    public CellState[,] GetGrid()
-    {
-        return _grid;
-    }
-
-
-    public String[,] GetStringGrid()
-    {
-        return StringGrid;
-    }
-
     public void SetupGrid(string oldgrid)
     {
         string[] dataradky = oldgrid.Split(',');
@@ -123,23 +108,21 @@
             string[] dataPolozky = dataradky[i].Split('.');
             for(int j = 0; j < BoardLength; j++)
             {
-                StringGrid[i,j] = dataPolozky[j];
+                _stringGrid[i,j] = dataPolozky[j];
             }
         }
         UpdateGrid();
     }
-
     public void UpdateGrid()
     {
         for (int i = 0; i < BoardLength; i++)
         {
             for (int j = 0; j < BoardLength; j++)
             {
-                _grid[i, j] = GetCellState(StringGrid[i,j]);
+                _grid[i, j] = GetCellState(_stringGrid[i,j]);
             }
         }
     }
-
     CellState GetCellState(string cellname)
     {
         switch (cellname)

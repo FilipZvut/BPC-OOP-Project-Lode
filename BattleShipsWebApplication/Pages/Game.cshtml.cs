@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Battleships.Logic;
 
+namespace Battleships.Pages;
 public class GameModel : PageModel
 {
     public string Nazev1 { get; set; }

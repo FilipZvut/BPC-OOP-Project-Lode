@@ -1,9 +1,11 @@
-﻿public class GameManager
+﻿namespace Battleships.Logic;
+public class GameManager
 {
     public Player player1;
     public Player player2;
     public Game game;
     public const int Pocet = 7;
+    public const int BoardLength = 5;
 
     public GameManager()
     {
@@ -59,14 +61,14 @@
         int PocetLodi = 0;
         Board.CellState[,] grid; 
         if(id == 1)
-            grid = game._player1.GetGrid();
+            grid = game._player1.Grid;
         else
-            grid = game._player2.GetGrid();
+            grid = game._player2.Grid;
 
 
-        for (int i = 0; i < Board.BoardLength; i++)
+        for (int i = 0; i < BoardLength; i++)
         {
-            for (int j = 0; j < Board.BoardLength; j++)
+            for (int j = 0; j < BoardLength; j++)
             {
                 if (grid[i, j] == Board.CellState.Ship)
                     PocetLodi++;
@@ -75,7 +77,9 @@
 
         return PocetLodi;
     }
-    public Player GetAktualniHrac() {  return game._currentPlayer; }
+    public Player AktualniHrac { 
+        get {  return game._currentPlayer; } 
+    }
 
     public bool Play(int row, int col, int id)
     {
@@ -104,28 +108,28 @@
         data += player1.Name + ";";
         data += player2.Name + ";";
 
-        for (int i = 0; i < Board.BoardLength; i++)
+        for (int i = 0; i < BoardLength; i++)
         {
-            for (int j = 0; j < Board.BoardLength; j++)
+            for (int j = 0; j < BoardLength; j++)
             {
                 data += player1.Board.StringGrid[i, j];
-                if (j != Board.BoardLength - 1)
+                if (j != BoardLength - 1)
                     data += ".";
             }
-            if (i != Board.BoardLength - 1)
+            if (i != BoardLength - 1)
                 data += ",";
         }
         data += ";";
 
-        for (int i = 0; i < Board.BoardLength; i++)
+        for (int i = 0; i < BoardLength; i++)
         {
-            for (int j = 0; j < Board.BoardLength; j++)
+            for (int j = 0; j < BoardLength; j++)
             {
                 data += player2.Board.StringGrid[i, j];
-                if(j != Board.BoardLength - 1)
+                if(j != BoardLength - 1)
                     data += ".";
             }
-            if(i!= Board.BoardLength - 1)
+            if(i!= BoardLength - 1)
                 data += ",";
         }
         data += ";"+ game._currentPlayer.Id;

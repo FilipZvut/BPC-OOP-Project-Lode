@@ -1,4 +1,7 @@
-﻿public class Game
+﻿using static Battleships.Logic.GameManager;
+
+namespace Battleships.Logic;
+public class Game
 {
     public Player _player1;
     public Player _player2;
@@ -28,9 +31,9 @@
         while(ShipsPlaced<GameManager.Pocet)
         {
             random.Next();
-            int row = random.Next(0, Board.BoardLength);
+            int row = random.Next(0, BoardLength);
             random.Next();
-            int col = random.Next(0, Board.BoardLength);
+            int col = random.Next(0, BoardLength);
             if (player.Board.PlaceShip(row, col))
                 ShipsPlaced++;
             
